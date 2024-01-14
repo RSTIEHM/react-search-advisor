@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useMutation, useQueryClient} from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate  } from "react-router-dom";
 import Loader from "../ui/Loader";
 import { editAdvisor } from "../services/apiAdvisors";
 import { useSingleAdvisorData } from "../features/advisors/useSingleAdvisor";
@@ -15,6 +15,8 @@ const EditAdvisor = () => {
   const { isLoading, data, isError, error } = useSingleAdvisorData(id);
   const [imageSelected, setImageSelected] = useState(null)
 
+
+  const navigate = useNavigate();
   // Initialize useForm outside of useEffect ===============================
   const { register, handleSubmit, reset, getValues, formState } = useForm();
   const {errors} = formState
@@ -34,6 +36,11 @@ const EditAdvisor = () => {
     }
   }, [data, reset]); // Ensure useEffect runs when data or reset function changes
 
+  function navigateWithMessage(path, length) {
+    setTimeout(() => {
+      navigate(path)
+    },length)
+  }
 
 
 
@@ -41,8 +48,10 @@ const EditAdvisor = () => {
     mutationFn: editAdvisor,
     onSuccess: () => {
       console.log("ON SUCCESS!!!!!!");
-      toast.success("Advisor Updated");
       queryClient.invalidateQueries({queryKey: ["advisors"]});
+      toast.success("Advisor Updated")
+      navigateWithMessage(`/advisors`, 500)
+      console.log("EDITED")
     },
     onError: (err) => toast.error(err.message)
   })

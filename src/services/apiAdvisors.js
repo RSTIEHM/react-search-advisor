@@ -19,6 +19,7 @@ export async function getAdvisor(id) {
   return data;
 }
 
+// =========================================================== CREATE ========================================
 export async function createAdvisor(newAdvisor) {
   // https://fbmnthpwcbpdarnmlxda.supabase.co/storage/v1/object/public/advisorImages/logo-dark.png
   const imageName = `${Math.random()}-${newAdvisor.img.name}`.replace("/", "");
@@ -92,6 +93,17 @@ export async function editAdvisor({ newAdvisor, id }) {
   return data;
 }
 
+// =========================================================== DELETE ========================================
 export async function deleteAdvisor(id) {
-  console.log("IN DELETE API", Number(id));
+  let deleteID = Number(id);
+  console.log("IN DELETE API", Number(deleteID));
+  const { data, error } = await supabase
+    .from("advisors")
+    .delete()
+    .eq("id", deleteID);
+  if (error) {
+    console.log(error);
+    throw new Error("Advisor could not be deleted");
+  }
+  return data;
 }

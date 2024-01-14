@@ -7,15 +7,18 @@ import { NavLink, useNavigate  } from "react-router-dom";
 import Loader from "../ui/Loader";
 import { deleteAdvisor } from "../services/apiAdvisors";
 import { useSingleAdvisorData } from "../features/advisors/useSingleAdvisor";
+// import useNavigateWithMessage from "../hooks/useNaviagationWithMessage";
 import { removeCompanyName } from "../utils/helpers";
 import toast from "react-hot-toast";
 
 const SingleAdvisor = () => {
 
-  const queryClient = useQueryClient()
-  const navigate = useNavigate()
   const { id } = useParams();
+  const queryClient = useQueryClient()
   const { isLoading, data, isError, error } = useSingleAdvisorData(id);
+
+  const navigate = useNavigate();
+
   const [advisorInfo, setAdvisorInfo] = useState({
     name: '',
     company: '',
@@ -25,16 +28,20 @@ const SingleAdvisor = () => {
     legal: ''
   });
 
-    const {mutate, isLoading: isDeleting} =  useMutation({
+
+  function navigateWithMessage(msg, path, length) {
+    setTimeout(() => {
+      toast.success(msg)
+      navigate(path)
+    },length)
+  }
+
+  const {mutate, isLoading: isDeleting} =  useMutation({
     mutationFn: deleteAdvisor,
     onSuccess: () => {
-      
-      queryClient.invalidateQueries({queryKey: ["advisors"]});
-      setTimeout(() => {
-        toast.success("Advisor Deleted");
-        navigate('/advisors')
-      },500)
-    },
+    queryClient.invalidateQueries({queryKey: ["advisors"]});
+    navigateWithMessage(`Deleted ${advisorInfo.name}`, "/advisors", 500)
+  },
     onError: (err) => toast.error(err.message)
   })
 
@@ -55,13 +62,12 @@ const SingleAdvisor = () => {
 
 
 
-
-
   function handleDelete(e) {
-   mutate(id)
-    console.log(e)
-    console.log("IN DELETE")
-    console.log(advisorInfo)
+    e.preventDefault()
+    const confirmed = confirm(`Are you sure you want to delete ${advisorInfo.name}`)
+    if(confirmed) {
+      mutate(id)
+    } 
   }
 
 

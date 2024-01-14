@@ -108,7 +108,20 @@ const CreateAdvisor = () => {
             })}
           />
         </div>
-
+        <div className="input-container">
+          <label htmlFor="img">Image </label>
+            <input 
+ 
+            name="img"
+            disabled={isCreating} 
+            type="file"  
+            id="img"
+            accept="image/*"
+            {...register("img", {
+              required: "This field is required"
+            })}
+            />
+        </div>
 
         <div className="input-container">
           <label htmlFor="tag">Tag </label>
@@ -127,20 +140,7 @@ const CreateAdvisor = () => {
             <option value="IND">IND</option>
           </select>
         </div>
-        <div className="input-container">
-          <label htmlFor="img">Image </label>
-            <input 
- 
-            name="img"
-            disabled={isCreating} 
-            type="file"  
-            id="img"
-            accept="image/*"
-            {...register("img", {
-              required: "This field is required"
-            })}
-            />
-        </div>
+
 
 
         {isShowing && (
