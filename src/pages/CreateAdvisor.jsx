@@ -11,20 +11,49 @@ import toast from "react-hot-toast";
 const RIS_LEGAL = "Investment Advisory Services offered through Sound Income Strategies, LLC, an SEC Registered Investment Advisory Firm. [COMPANYNAME] and Sound Income Strategies, LLC are not associated entities. [COMPANYNAME] is a franchisee of Retirement Income Source, LLC. Sound Income Strategies, LLC and Retirement Income Source, LLC are associated entities."
 const SIS_LEGAL = "Investment Advisory Services offered through Sound Income Strategies, LLC, an SEC Registered Investment Advisory Firm. [COMPANYNAME] and Sound Income Strategies, LLC are not associated entities."
 
+// const FormWrapper = styled.div`
+//   width: 100%;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   height: 80vh;
+//   padding: 50px 0;
+// `;
+
+// const FormSection = styled.section`
+//   max-width: 685px;
+//   width: 80%;
+//   min-width: 300px;
+//   margin:100px auto 65px auto;
+//   border-radius: 10px;
+//   border: 1px solid #aaaaaa9f;
+//   background-color: #d3dedd4d;
+//   box-shadow: 10px 5px 10px rgba(128, 128, 128, 0.173);
+//   padding: 2rem 2rem 2rem 2rem;
+//   @media (max-width: 650px) {
+//     width: 90%;
+//     margin:0 auto 65px auto;
+//     transform:translateY(-5%)
+//   }
+// `;
+
 const FormWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 80vh;
-  padding: 50px 0;
+  height: 100vh;
+
+  @media (max-width: 650px) {
+    align-items: start;
+  }
 `;
 
 const FormSection = styled.section`
   max-width: 685px;
   width: 80%;
   min-width: 300px;
-  margin:100px auto 65px auto;
+  margin:50px auto 65px auto;
   border-radius: 10px;
   border: 1px solid #aaaaaa9f;
   background-color: #d3dedd4d;
@@ -32,8 +61,13 @@ const FormSection = styled.section`
   padding: 2rem 2rem 2rem 2rem;
   @media (max-width: 650px) {
     width: 90%;
-    margin:0 auto 65px auto;
-    transform:translateY(-5%)
+  }
+`;
+
+const CreateButtonContainer = styled.div`
+    display: flex;
+    @media (max-width: 650px) {
+      display: block;;
   }
 `;
 
@@ -187,16 +221,18 @@ const CreateAdvisor = () => {
             </textarea>
           </div>
         )}
+        <CreateButtonContainer>
+          <NavLink className="btn btn-submit" to={`/advisors`}>
+            CANCEL
+          </NavLink>
+          <button  className="btn btn-submit btn-reset" type="reset">
+            RESET 
+          </button>
+          <button disabled={isCreating}  className="btn btn-submit" type="submit">
+            SUBMIT
+          </button>
+        </CreateButtonContainer>
 
-        <NavLink className="btn btn-submit" to={`/advisors`}>
-          CANCEL
-        </NavLink>
-        <button  className="btn btn-submit btn-reset" type="reset">
-          RESET 
-        </button>
-        <button disabled={isCreating}  className="btn btn-submit" type="submit">
-          SUBMIT
-        </button>
 
       </form>
     </FormSection>

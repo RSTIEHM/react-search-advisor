@@ -16,14 +16,19 @@ const FormWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 80vh;
+  height: 100vh;
+
+  @media (max-width: 650px) {
+    align-items: start;
+    height: 860px;
+  }
 `;
 
 const FormSection = styled.section`
   max-width: 685px;
   width: 80%;
   min-width: 300px;
-  margin:120px auto 65px auto;
+  margin:50px auto 65px auto;
   border-radius: 10px;
   border: 1px solid #aaaaaa9f;
   background-color: #d3dedd4d;
@@ -31,7 +36,6 @@ const FormSection = styled.section`
   padding: 2rem 2rem 2rem 2rem;
   @media (max-width: 650px) {
     width: 90%;
-    margin:100px auto 65px auto;
   }
 `;
 

@@ -121,19 +121,19 @@ const SingleAdvisor = () => {
 
           {rendered  ? (
               <div className="btn-container">
-              <NavLink
-                  className="home-link btn-green"
-                  to={`/advisors/edit/${id}`}
-                >
-                  Edit
-              </NavLink>
-              <button onClick={(e) => handleDelete(e)} className="home-link btn-delete" to={`/advisors`}>
-                {isDeleting ? "X" : "Delete"}
-              </button>
-              <NavLink className="home-link" to={`/advisors`}>
-                Home
-              </NavLink>
-            </div>
+                <NavLink
+                    className="home-link btn-green"
+                    to={`/advisors/edit/${id}`}
+                  >
+                    Edit
+                </NavLink>
+                <button onClick={(e) => handleDelete(e)} className="home-link btn-delete" to={`/advisors`}>
+                  {isDeleting ? "X" : "Delete"}
+                </button>
+                <NavLink className="home-link" to={`/advisors`}>
+                  Home
+                </NavLink>
+              </div>
           ) : (
             <div className="btn-container">
             <NavLink className="home-link" to={`/advisors`}>

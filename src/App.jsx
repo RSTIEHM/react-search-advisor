@@ -18,6 +18,10 @@ import "./styles/global.css";
 import { Toaster } from "react-hot-toast";
 
 
+
+// TODOS 
+
+  // 1: Fix Buttons in Single Advisor
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
