@@ -10,7 +10,6 @@ const AdvisorItem = ({advisor}) => {
   >
     <div className="advisor-wrapper">
       <div className="advisor-img-container">
-        {/* <img className="advisor-img" src={`/images/${advisor.img}`} /> */}
         <img className="advisor-img" src={advisor.img} />
       </div>
       <p className="advisor-name">{advisor.name}</p>

@@ -21,9 +21,8 @@ export async function getAdvisor(id) {
 
 // =========================================================== CREATE ========================================
 export async function createAdvisor(newAdvisor) {
-  // https://fbmnthpwcbpdarnmlxda.supabase.co/storage/v1/object/public/advisorImages/logo-dark.png
   const imageName = `${Math.random()}-${newAdvisor.img.name}`.replace("/", "");
-  const imagePath = `https://fbmnthpwcbpdarnmlxda.supabase.co/storage/v1/object/public/advisorImages/${imageName}`;
+  const imagePath = `${supabaseUrl}/storage/v1/object/public/advisorImages/${imageName}`;
 
   const { data, error } = await supabase
     .from("advisors")

@@ -14,7 +14,6 @@ const useNavigateWithMessage = (msg, path, delay) => {
     return () => clearTimeout(timeoutId); // Cleanup the timeout on component unmount
   }, [msg, path, delay, navigate]);
 
-  // Optionally, you can return the navigate function if needed
   return navigate;
 };
 

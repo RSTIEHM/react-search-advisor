@@ -33,7 +33,7 @@ const CreateAdvisor = () => {
 
 
 
-  // TOGGLES TEXTAREA FOR IND TAG ===================
+  // TOGGLES TEXTAREA FOR IND TAG ======================
   function handleSelectChange(e) {
     let category = e.target.value;
     if (category === "IND") {

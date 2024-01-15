@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
 import styled from "styled-components"
 import { useState } from "react";
-import AdvisorList from "./AdvisorList";
+
+import AdvisorList from "../ui/AdvisorList";
 import FilterButton from "../ui/FilterButton";
 import { useAdvisors } from "../features/advisors/useAdvisors";
 import Loader from "../ui/Loader";
@@ -32,6 +33,9 @@ const AdvisorGrid = styled.div`
 `;
 
 
+const ALL_CATEGORIES = ["ALL", "RIS-SIS", "RIS", "SIS", "IND"];
+
+
 
 const Advisors = () => {
 
@@ -39,21 +43,18 @@ const Advisors = () => {
   const [category, setCategory] = useState("ALL");
   const [selected, setSelected] = useState(true);
 
-  const ALL_CATEGORIES = ["ALL", "RIS-SIS", "RIS", "SIS", "IND"];
-
   function handleClick(filterCategory) {
     setCategory(filterCategory);
     setSelected(true);
   }
 
-
-  // LOAD =================================
+  // ==================== LOAD =================================
   if(isLoading) return (<Loader />)
-  // ERR =================================
+  // ====================== ERROR =================================
   if(error) {
     console.log(error)
   }
-  // DATA ===============================
+  //=====================  DATA ===============================
   return (
     <AllAdvisorsWrapper>
       <CategoryButtonContainer>

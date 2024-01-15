@@ -57,7 +57,7 @@ const EditAdvisor = () => {
         legal: removeCompanyName(legal, company)
       });
     }
-  }, [data, reset]); // Ensure useEffect runs when data or reset function changes
+  }, [data, reset]); 
 
   function navigateWithMessage(path, length) {
     setTimeout(() => {

@@ -22,7 +22,6 @@ const Navbar = () => {
         <div className="auth-nav-links">
       {rendered ? (
         <>
-            <p>Hi Dougie!!</p>
           <a className="btn-auth" href="/advisors/create">
             Create
           </a>
@@ -38,10 +37,6 @@ const Navbar = () => {
             </a>
           </>
           )}
-
-
-
-
 
         </div>
       </div>

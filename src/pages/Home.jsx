@@ -32,9 +32,4 @@ const Home = () => {
 export default Home;
 
 
-{/* <div className="home-container">
-<img className="home-logo" src="/images/SIG_BIG.png" />
-<NavLink className="home-btn" to={`/advisors`}>
-  ENTER
-</NavLink>
-</div> */}
+

@@ -28,8 +28,11 @@ const FormSection = styled.section`
 
 const Login = () => {
 
-  const [email, setEmail] = useState("rich@email.com")
-  const [password, setPassword] = useState("12341234")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
+  // const [email, setEmail] = useState("rich@email.com")
+  // const [password, setPassword] = useState("12341234")
 
   const {login, isLoading} = useLogin()
 
@@ -84,11 +87,11 @@ const Login = () => {
           </div>
 
           <button 
-          className="btn btn-submit" 
-          type="submit"
-          disabled={isLoading}
-          >
-            {isLoading ? <SpinnerMini /> : "Log In"}
+            className="btn btn-submit" 
+            type="submit"
+            disabled={isLoading}
+            >
+              {isLoading ? <SpinnerMini /> : "Log In"}
           </button>
           <br />
           <strong>Dont have an account?</strong>
