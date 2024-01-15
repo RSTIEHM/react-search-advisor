@@ -1,5 +1,4 @@
 import supabase from "./supaBase";
-import { supabaseUrl } from "./supaBase";
 
 // FUNCTIONS TO INTERACT WITH THE API
 

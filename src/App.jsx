@@ -14,7 +14,7 @@ import CreateAdvisor from "./pages/CreateAdvisor";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import PageNotFound from "./pages/PageNotFound"
-import "./styles/Global.css";
+import "./styles/global.css";
 import { Toaster } from "react-hot-toast";
 
 

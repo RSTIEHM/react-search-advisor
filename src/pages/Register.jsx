@@ -33,7 +33,7 @@ const Register = () => {
     password: "",
   })
 
-  const {signup, isLoading} = useSignup()
+  const {signup} = useSignup()
 
   function handleChange(e) {
     setFormInput((prev) => {
