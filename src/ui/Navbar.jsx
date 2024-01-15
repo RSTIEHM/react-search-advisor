@@ -2,10 +2,19 @@
 import LogoutButton from "../features/authentication/Logout";
 import {renderAuth} from "../utils/helpers"
 import styled from "styled-components";
-
+import { NavLink } from "react-router-dom";
+import { useUser } from "../features/authentication/useUser";
 
 const Navbar = () => {
   let rendered = renderAuth()
+
+  const {isLoading, user, isAuthenticated} = useUser();
+
+  function getFirstName(str) {
+    return str.split(" ")[0]
+  }
+
+
 
   const NavbarContainer = styled.div`
       background-color: rgba(195, 188, 188, 0.194);
@@ -26,32 +35,41 @@ const Navbar = () => {
     <NavbarContainer>
       <Navbar>
       
-        <a href="/advisors">
+        <NavLink to="/advisors">
           {" "}
           <img
             className="nav-logo"
             src="/images/sig-logo_dk2s7t.png"
             alt=""
           />
-        </a>
+        </NavLink>
 
         <div className="auth-nav-links">
-      {rendered ? (
+          {rendered ? (
         <>
-          <a className="btn-auth" href="/advisors/create">
+          {!isLoading && isAuthenticated ? (
+            <div className="user-icon">
+                         Hello, {getFirstName(user.user_metadata.fullName)}
+              <img src="./user.png" alt="" />
+   
+            </div>
+          ) : "Loading..."}
+          <p></p>
+          <NavLink className="btn-auth" to="/advisors/create">
             Create
-          </a>
+          </NavLink>
           <LogoutButton />
+
         </>
         ) : (
           <>
 
-            <a className="btn-auth" href="/login">
+            <NavLink className="btn-auth" to="/login">
               Login
-            </a>
-            <a className="btn-auth" href="/register">
+            </NavLink>
+            <NavLink className="btn-auth" to="/register">
               Register
-            </a>
+            </NavLink>
           </>
           )}
 

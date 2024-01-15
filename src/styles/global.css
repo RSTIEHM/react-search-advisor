@@ -17,6 +17,7 @@ html,
 body {
   height: 100%;
   font-family: 'Roboto', sans-serif;
+  scroll-behavior: smooth
 }
 
 
@@ -111,7 +112,22 @@ button.search-button {
   margin: 0 auto;
 }
 
+.user-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
 
+.user-icon img {
+  width: 30px;
+}
+
+@media (max-width: 690px) {
+  .user-icon {
+display: none;
+  }
+}
 
 
 
@@ -634,14 +650,15 @@ a.btn:hover {
   background-color: rgba(0, 136, 255, 0);
   color: #262424;
   outline: none;
-  border: 0px solid #232222;
-  padding: 10px 20px;
-  font-weight: bold;
+  border: 1px solid #bab0b0ad;
+  padding: 5px 20px;
+  /* font-weight: bold; */
   opacity: 1;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   text-decoration: none;
   text-transform: uppercase;
   cursor: pointer;
+  border-radius: 5px;
 }
 
 .btn-auth:hover {

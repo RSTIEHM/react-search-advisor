@@ -12,8 +12,9 @@ const HomeContainer = styled.div`
 `;
 
 const HomeImg = styled.img`
-  width: 600px;
+  width: 400px;
   margin: 0 auto;
+  padding: 1rem;
   transform: translateY(-56px);
 `;
 

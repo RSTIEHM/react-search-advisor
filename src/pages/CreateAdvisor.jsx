@@ -5,47 +5,20 @@ import { NavLink } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { createAdvisor } from "../services/apiAdvisors";
 import toast from "react-hot-toast";
-
+import FormErrorMsg from "../ui/FormErrorMsg";
 
 
 const RIS_LEGAL = "Investment Advisory Services offered through Sound Income Strategies, LLC, an SEC Registered Investment Advisory Firm. [COMPANYNAME] and Sound Income Strategies, LLC are not associated entities. [COMPANYNAME] is a franchisee of Retirement Income Source, LLC. Sound Income Strategies, LLC and Retirement Income Source, LLC are associated entities."
 const SIS_LEGAL = "Investment Advisory Services offered through Sound Income Strategies, LLC, an SEC Registered Investment Advisory Firm. [COMPANYNAME] and Sound Income Strategies, LLC are not associated entities."
 
-// const FormWrapper = styled.div`
-//   width: 100%;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   height: 80vh;
-//   padding: 50px 0;
-// `;
-
-// const FormSection = styled.section`
-//   max-width: 685px;
-//   width: 80%;
-//   min-width: 300px;
-//   margin:100px auto 65px auto;
-//   border-radius: 10px;
-//   border: 1px solid #aaaaaa9f;
-//   background-color: #d3dedd4d;
-//   box-shadow: 10px 5px 10px rgba(128, 128, 128, 0.173);
-//   padding: 2rem 2rem 2rem 2rem;
-//   @media (max-width: 650px) {
-//     width: 90%;
-//     margin:0 auto 65px auto;
-//     transform:translateY(-5%)
-//   }
-// `;
 
 const FormWrapper = styled.div`
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: 100vh;
 
   @media (max-width: 650px) {
-    align-items: start;
+
+    transform:translateY(-2%);
   }
 `;
 
@@ -74,7 +47,6 @@ const CreateButtonContainer = styled.div`
 
 const CreateAdvisor = () => {
 
-
   const queryClient = useQueryClient()
   const {register, handleSubmit, reset, formState} = useForm()
   const {errors} = formState
@@ -84,8 +56,8 @@ const CreateAdvisor = () => {
     mutationFn: createAdvisor,
     onSuccess: () => {
       toast.success("New Advisor Created")
-      console.log("CREATE")
       queryClient.invalidateQueries({queryKey: ["advisors"]})
+      window.scrollTo(0,0)
       reset()
     },
     onError: (err) => console.log(err)
@@ -124,7 +96,7 @@ const CreateAdvisor = () => {
       <form onSubmit={handleSubmit(onSubmit, onError)}>
 
         <div className="input-container">
-          <label htmlFor="name">Name {errors?.name?.message && <span>This field is required</span>}</label>
+          <label htmlFor="name">Name {errors?.name?.message && <FormErrorMsg text="Name is required"/>}</label>
           <input
             id="name"
             disabled={isCreating}
@@ -139,7 +111,7 @@ const CreateAdvisor = () => {
         </div>
 
         <div className="input-container">
-          <label htmlFor="company">Company</label>
+          <label htmlFor="company">Company {errors?.company?.message && <FormErrorMsg text="Company is required"/>}</label>
           <input
             id="company"
             disabled={isCreating}
@@ -155,7 +127,7 @@ const CreateAdvisor = () => {
 
 
         <div className="input-container">
-          <label htmlFor="website">Website</label>
+          <label htmlFor="website">Website {errors?.website?.message && <FormErrorMsg text="Website is required"/>}</label>
           <input 
             id="website"
             disabled={isCreating}
@@ -169,7 +141,7 @@ const CreateAdvisor = () => {
           />
         </div>
         <div className="input-container">
-          <label htmlFor="img">Image </label>
+          <label htmlFor="img">Image {errors?.img?.message && <FormErrorMsg text="Image is required"/>}</label>
             <input 
  
             name="img"
@@ -184,7 +156,7 @@ const CreateAdvisor = () => {
         </div>
 
         <div className="input-container">
-          <label htmlFor="tag">Tag </label>
+          <label htmlFor="tag">Tag {errors?.tag?.message && <FormErrorMsg text="Tag is required"/>}</label>
           <select {...register("tag", {
               required: "This field is required"
             })} onChange={(e) => handleSelectChange(e)} 
@@ -206,7 +178,7 @@ const CreateAdvisor = () => {
         {isShowing && (
           <div className="input-container">
             <label htmlFor="legal">
-              Legal {isShowing && <em>(IND Must have a custom legal)</em>}
+              Legal {isShowing && errors?.legal?.message && <FormErrorMsg text="Legal is required"/>}
             </label>
             <textarea 
                {...register("legal", {
@@ -217,7 +189,6 @@ const CreateAdvisor = () => {
               className="form-input form-input__text-area"
               id={"legal"}
             >
-              Please Enter Legal....
             </textarea>
           </div>
         )}

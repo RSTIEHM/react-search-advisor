@@ -1,7 +1,9 @@
 import styled from "styled-components";
-import { useState } from "react";
 import { useLogin } from "../features/authentication/useLogin";
 import SpinnerMini from "../ui/SpinnerMini"
+import { useForm } from "react-hook-form";
+import FormErrorMsg from "../ui/FormErrorMsg";
+import { NavLink } from "react-router-dom";
 
 const FormWrapper = styled.div`
   width: 100%;
@@ -31,22 +33,19 @@ const FormSection = styled.section`
 
 const Login = () => {
 
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-
-
+  const {register, handleSubmit, reset,  formState} = useForm()
+  const {errors} = formState
 
   const {login, isLoading} = useLogin()
 
-  function handlesubmit(e) {
-    e.preventDefault()
-
-    if(!email || !password) return 
+  function onSubmit({email, password}) {
+    if(!email || !password) {
+      return
+    } 
     login(
       {email, password},
       {onSettled: () => {
-        setEmail("")
-        setPassword("")
+        reset()
       }}
       )
   }
@@ -54,44 +53,48 @@ const Login = () => {
   return (
     <FormWrapper>
       <FormSection>
-        <a href="/">
-          <img
-            className="nav-logo-center"
-            src="https://res.cloudinary.com/djangoles/image/upload/v1703936704/sig-logo_dk2s7t.png"
-            alt=""
-          />
-        </a>
-        <h1 style={{textAlign: "center", margin: "20px 0"}}>Log in to your account</h1>
-        <form onSubmit={handlesubmit}>
+        <div style={{display:"block", margin: "0 auto", width: "40%"}}>
+          <NavLink  to="/">
+            <img
+              className="nav-logo-center"
+              src="https://res.cloudinary.com/djangoles/image/upload/v1703936704/sig-logo_dk2s7t.png"
+              alt=""
+            />
+          </NavLink>
+        </div>
+
+        <h1>Log in to your account</h1>
+        <form  onSubmit={handleSubmit(onSubmit)}>
           <div className="input-container">
-            <label htmlFor="name">Email</label>
+            <label htmlFor="name">Email {errors?.email?.message && <FormErrorMsg text="Email is required"/>}</label>
             <input
               className="form-input"
               type="text"
+              id="email"
               name="email"
               placeholder="Enter Your Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              disabled={isLoading}
+              {...register("email",{
+                required: "This field is required"
+              })}
             />
           </div>
           <div className="input-container">
-            <label htmlFor="name">Password</label>
+            <label htmlFor="name">Password {errors?.password?.message && <FormErrorMsg text="Password is required"/>}</label>
             <input
+              id="password"
               className="form-input"
-              type="text"
+              type="password"
               name="password"
               placeholder="Enter Your Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              disabled={isLoading}
+              {...register("password",{
+                required: "This field is required"
+              })}
             />
           </div>
 
           <button 
             className="btn btn-submit" 
             type="submit"
-            disabled={isLoading}
             >
               {isLoading ? <SpinnerMini /> : "Log In"}
           </button>

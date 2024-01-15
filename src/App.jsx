@@ -19,9 +19,6 @@ import { Toaster } from "react-hot-toast";
 
 
 
-// TODOS 
-
-  // 1: Fix Buttons in Single Advisor
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -39,22 +36,16 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-
           <Route element={<AppLayoutUse2 />}>
             <Route path="/advisors" element={<Advisors />} />
           </Route>
-
           <Route element={<AppLayoutUse3 />}>
             <Route path="/advisors/:id" element={<SingleAdvisor />} />
           </Route>
-
-
           <Route element={<ProtectedRoutes><AppLayoutUse /></ProtectedRoutes>}>
               <Route path="/advisors/create" element={<CreateAdvisor />} />
               <Route path="/advisors/edit/:id" element={<EditAdvisor />} />
           </Route>
-
-
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="*"  element={<PageNotFound />} />

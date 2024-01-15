@@ -1,6 +1,8 @@
 import styled from "styled-components";
-import {useState} from "react"
+import { useForm } from "react-hook-form";
 import { useSignup } from "../features/authentication/useSignup";
+import FormErrorMsg from "../ui/FormErrorMsg";
+import { NavLink } from "react-router-dom";
 
 const FormWrapper = styled.div`
   width: 100%;
@@ -26,91 +28,82 @@ const FormSection = styled.section`
 `;
 
 
-
 const Register = () => {
 
-
-  const [formInput, setFormInput] = useState({
-    fullName: "",
-    email: "",
-    password: "",
-  })
+  const {register, handleSubmit, reset,  formState} = useForm()
+  const {errors} = formState
 
   const {signup} = useSignup()
 
-  function handleChange(e) {
-    setFormInput((prev) => {
-      return {
-        ...prev, 
-        [e.target.name] : e.target.value
+  function onSubmit({fullName, email, password}) {
+    signup({fullName, email, password}, {
+      onSettled: () => {
+        reset()
       }
     })
-
   }
 
-  function handleSubmit(e) {
-    e.preventDefault()
-   onSubmit({fullName, email, password})
-  }
-  function  onSubmit() {
-    signup({fullName, email, password}, {
-      onSettled: setFormInput({})
-    })
-  }
-  const {fullName, email, password} = formInput
+
+
   return (
     <FormWrapper>
       <FormSection>
-        <a href="/">
-          <img
-            className="nav-logo-center"
-            src="https://res.cloudinary.com/djangoles/image/upload/v1703936704/sig-logo_dk2s7t.png"
-            alt=""
-          />
-        </a>
+        <div style={{display:"block", margin: "0 auto", width: "40%"}}>
+          <NavLink  to="/">
+            <img
+              className="nav-logo-center"
+              src="https://res.cloudinary.com/djangoles/image/upload/v1703936704/sig-logo_dk2s7t.png"
+              alt=""
+            />
+          </NavLink>
+        </div>
+
         <h1>Register An Account</h1>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="input-container">
-            <label htmlFor="name">Full Name</label>
+            <label htmlFor="name">Full Name {errors?.fullName?.message && <FormErrorMsg text="Name is required"/>}</label>
             <input
-              onChange={(e)=>handleChange(e)}
               id="fullName"
-              value={formInput.fullName}
               className="form-input"
               type="text"
               name="fullName"
               placeholder="Enter Your Full Name"
+              {...register("fullName",{
+                required: "This field is required"
+              })}
             />
           </div>
           <div className="input-container">
-            <label htmlFor="name">Email</label>
+            <label htmlFor="email">Email {errors?.email?.message && <FormErrorMsg text="Email is required"/>}</label>
             <input
-              onChange={(e)=>handleChange(e)}
               id="email"
-              value={formInput.email}
               className="form-input"
               type="text"
               name="email"
               placeholder="Enter Your Email"
+              {...register("email",{
+                required: "This field is required"
+              })}
             />
           </div>
           <div className="input-container">
-            <label htmlFor="name">Password</label>
+            <label htmlFor="name">Password {errors?.password?.message && <FormErrorMsg text="Password is required"/>}</label>
             <input
-              onChange={(e)=>handleChange(e)}
               id="password"
-              value={formInput.password}
               className="form-input"
-              type="text"
+              type="password"
               name="password"
               placeholder="Enter Your Password"
+              {...register("password",{
+                required: "This field is required"
+              })}
             />
           </div>
 
 
           <button className="btn btn-submit" type="submit">
-            Submit
+            Register
           </button>
           <br />
           <strong>Already have an account?</strong>
