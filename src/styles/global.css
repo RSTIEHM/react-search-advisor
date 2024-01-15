@@ -357,6 +357,7 @@ a.search-result-link:hover {
 
 @media (max-width: 815px) {
   .single-advisor-wrapper {
+    width: 90%;
     padding: 25px 20px;
     transform: translateY(3%);
   }

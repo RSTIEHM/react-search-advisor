@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import { useMutation, useQueryClient} from "@tanstack/react-query";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
@@ -9,6 +10,32 @@ import toast from "react-hot-toast";
 
 const RIS_LEGAL = "Investment Advisory Services offered through Sound Income Strategies, LLC, an SEC Registered Investment Advisory Firm. [COMPANYNAME] and Sound Income Strategies, LLC are not associated entities. [COMPANYNAME] is a franchisee of Retirement Income Source, LLC. Sound Income Strategies, LLC and Retirement Income Source, LLC are associated entities."
 const SIS_LEGAL = "Investment Advisory Services offered through Sound Income Strategies, LLC, an SEC Registered Investment Advisory Firm. [COMPANYNAME] and Sound Income Strategies, LLC are not associated entities."
+
+const FormWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  padding: 50px 0;
+`;
+
+const FormSection = styled.section`
+  max-width: 685px;
+  width: 80%;
+  min-width: 300px;
+  margin:100px auto 65px auto;
+  border-radius: 10px;
+  border: 1px solid #aaaaaa9f;
+  background-color: #d3dedd4d;
+  box-shadow: 10px 5px 10px rgba(128, 128, 128, 0.173);
+  padding: 2rem 2rem 2rem 2rem;
+  @media (max-width: 650px) {
+    width: 90%;
+    margin:0 auto 65px auto;
+    transform:translateY(-5%)
+  }
+`;
 
 
 const CreateAdvisor = () => {
@@ -57,11 +84,10 @@ const CreateAdvisor = () => {
   }
 
   return (
-    <section className="form-container">
-
-      <h1>Create Advisor</h1>
+    <FormWrapper>
+    <FormSection>
+    <h1>Create Advisor</h1>
       <form onSubmit={handleSubmit(onSubmit, onError)}>
-
 
         <div className="input-container">
           <label htmlFor="name">Name {errors?.name?.message && <span>This field is required</span>}</label>
@@ -173,7 +199,8 @@ const CreateAdvisor = () => {
         </button>
 
       </form>
-    </section>
+    </FormSection>
+    </FormWrapper>
   );
 };
 

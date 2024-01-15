@@ -52,7 +52,6 @@ const Navbar = () => {
             <a className="btn-auth" href="/register">
               Register
             </a>
-            <p>Hi Chip</p>
           </>
           )}
 

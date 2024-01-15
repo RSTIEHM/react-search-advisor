@@ -23,12 +23,16 @@ const FormSection = styled.section`
   max-width: 685px;
   width: 80%;
   min-width: 300px;
-  margin:100px auto 65px auto;
+  margin:120px auto 65px auto;
   border-radius: 10px;
   border: 1px solid #aaaaaa9f;
   background-color: #d3dedd4d;
   box-shadow: 10px 5px 10px rgba(128, 128, 128, 0.173);
   padding: 2rem 2rem 2rem 2rem;
+  @media (max-width: 650px) {
+    width: 90%;
+    margin:100px auto 65px auto;
+  }
 `;
 
 
