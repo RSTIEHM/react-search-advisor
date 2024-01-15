@@ -12,7 +12,7 @@ export function useSignup() {
       toast.success(
         "Account has been created. Please check your email for verification"
       );
-      naviagate("/advisors", { replace: true });
+      naviagate("/login", { replace: true });
     },
   });
 
