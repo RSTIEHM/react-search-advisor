@@ -31,8 +31,7 @@ const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
-  // const [email, setEmail] = useState("rich@email.com")
-  // const [password, setPassword] = useState("12341234")
+
 
   const {login, isLoading} = useLogin()
 
