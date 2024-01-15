@@ -1,4 +1,39 @@
+import {useState} from "react"
+import { useSignup } from "../features/authentication/useSignup";
+
 const Register = () => {
+
+  // const [email, setEmail] = useState("rich@email.com")
+  // const [password, setPassword] = useState("12341234")
+
+  const [formInput, setFormInput] = useState({
+    fullName: "",
+    email: "",
+    password: "",
+  })
+
+  const {signup, isLoading} = useSignup()
+
+  function handleChange(e) {
+    setFormInput((prev) => {
+      return {
+        ...prev, 
+        [e.target.name] : e.target.value
+      }
+    })
+
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault()
+   onSubmit({fullName, email, password})
+  }
+  function  onSubmit() {
+    signup({fullName, email, password}, {
+      onSettled: setFormInput({})
+    })
+  }
+  const {fullName, email, password} = formInput
   return (
     <div className="form-wrapper">
       <section className="form-container form-container-register-login">
@@ -11,21 +46,25 @@ const Register = () => {
         </a>
         <h1>Register An Account</h1>
 
-        <form method="POST" action="/auth/register">
+        <form onSubmit={handleSubmit}>
           <div className="input-container">
-            <label htmlFor="name">Name</label>
+            <label htmlFor="name">Full Name</label>
             <input
-              value=""
+              onChange={(e)=>handleChange(e)}
+              id="fullName"
+              value={formInput.fullName}
               className="form-input"
               type="text"
-              name="name"
+              name="fullName"
               placeholder="Enter Your Full Name"
             />
           </div>
           <div className="input-container">
             <label htmlFor="name">Email</label>
             <input
-              value=""
+              onChange={(e)=>handleChange(e)}
+              id="email"
+              value={formInput.email}
               className="form-input"
               type="text"
               name="email"
@@ -35,21 +74,16 @@ const Register = () => {
           <div className="input-container">
             <label htmlFor="name">Password</label>
             <input
+              onChange={(e)=>handleChange(e)}
+              id="password"
+              value={formInput.password}
               className="form-input"
               type="text"
               name="password"
               placeholder="Enter Your Password"
             />
           </div>
-          <div className="input-container">
-            <label htmlFor="name">Confirm Password</label>
-            <input
-              className="form-input"
-              type="text"
-              name="password_confirm"
-              placeholder="Enter Your Password"
-            />
-          </div>
+
 
           <button className="btn btn-submit" type="submit">
             Submit

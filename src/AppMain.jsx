@@ -1,20 +1,24 @@
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route} from "react-router-dom";
+import ProtectedRoutes from "./ui/ProtectedRoutes";
 import AppLayoutUse from "./ui/AppLayoutUse";
 import AppLayoutUse2 from "./ui/AppLayoutUse_2";
+import AppLayoutUse3 from "./ui/AppLayoutUse_3";
+
 
 import Home from "./pages/Home";
 import Advisors from "./pages/Advisors";
 import SingleAdvisor from "./pages/SingleAdvisor";
 import EditAdvisor from "./pages/EditAdvisor";
 import CreateAdvisor from "./pages/CreateAdvisor";
-import AdvisorCategory from "./pages/AdvisorCategory";
+// import AdvisorCategory from "./pages/AdvisorCategory";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import "./styles/Global.css";
 import { Toaster } from "react-hot-toast";
+import PageNotFound from "./pages/PageNotFound"
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -32,18 +36,26 @@ const AppMain = () => {
       <ReactQueryDevtools initialIsOpen={false} />
       <BrowserRouter>
         <Routes>
-
           <Route path="/" element={<Home />} />
+
           <Route element={<AppLayoutUse2 />}>
             <Route path="/advisors" element={<Advisors />} />
           </Route>
-          <Route element={<AppLayoutUse />}>
+
+          <Route element={<AppLayoutUse3 />}>
             <Route path="/advisors/:id" element={<SingleAdvisor />} />
-            <Route path="/advisors/create" element={<CreateAdvisor />} />
-            <Route path="/advisors/edit/:id" element={<EditAdvisor />} />
           </Route>
+
+
+          <Route element={<ProtectedRoutes><AppLayoutUse /></ProtectedRoutes>}>
+              <Route path="/advisors/create" element={<CreateAdvisor />} />
+              <Route path="/advisors/edit/:id" element={<EditAdvisor />} />
+          </Route>
+
+
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="*"  element={<PageNotFound />} />
         </Routes>
         
       </BrowserRouter>

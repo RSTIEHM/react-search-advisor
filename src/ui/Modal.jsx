@@ -1,11 +1,13 @@
 import styled from "styled-components";
 
 const StyledModal = styled.div`
+  width: 90%;
+  height: 80vh;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: var(--color-grey-0);
+  background-color: #2907071b;
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-lg);
   padding: 3.2rem 4rem;
@@ -18,7 +20,7 @@ const Overlay = styled.div`
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: var(--backdrop-color);
+  background-color: #ffffff1b;
   backdrop-filter: blur(4px);
   z-index: 1000;
   transition: all 0.5s;
@@ -48,3 +50,13 @@ const Button = styled.button`
     color: var(--color-grey-500);
   }
 `;
+
+function Modal() {
+  return (
+    <StyledModal>
+      
+    </StyledModal>
+  )
+}
+
+export default Modal

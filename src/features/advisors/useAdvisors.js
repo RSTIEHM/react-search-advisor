@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getAdvisors, getAdvisor } from "../../services/apiAdvisors";
+import { getAdvisors } from "../../services/apiAdvisors";
 
 export function useAdvisors() {
   const {
@@ -12,15 +12,3 @@ export function useAdvisors() {
   });
   return { isLoading, error, advisors };
 }
-
-// export function useAdvisor() {
-//   const {
-//     isLoading,
-//     data: advisor,
-//     error,
-//   } = useQuery({
-//     queryKey: ["advisors"],
-//     queryFn: getAdvisor,
-//   });
-//   return { isLoading, error, advisor };
-// }

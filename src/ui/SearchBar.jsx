@@ -74,7 +74,8 @@ const SearchBar = () => {
           />
 
           {isFocused && isTyping && query.length > 1 && (
-            <div className="absolute">
+            <div 
+            className="absolute">
               {filteredAdvisor.length === 0 ? (
                 <div className="">
                   <p className="search-advisor-anchor">No Advisor Found?</p>
