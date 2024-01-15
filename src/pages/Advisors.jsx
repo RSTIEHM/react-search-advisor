@@ -1,10 +1,36 @@
 /* eslint-disable react/prop-types */
-import { useState, useEffect } from "react";
-
+import styled from "styled-components"
+import { useState } from "react";
 import AdvisorList from "./AdvisorList";
 import FilterButton from "../ui/FilterButton";
 import { useAdvisors } from "../features/advisors/useAdvisors";
 import Loader from "../ui/Loader";
+
+
+const AllAdvisorsWrapper = styled.div`
+ width: 95%;
+ margin: 0 auto;
+ padding: 0 0 50px 0;
+`
+
+const CategoryButtonContainer = styled.div`
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 5px;
+  margin: 10px 0;
+`;
+
+const CategoryLogos = styled.div`
+  margin-left: 30px;
+`;
+
+const AdvisorGrid = styled.div`
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+`;
+
 
 
 const Advisors = () => {
@@ -21,16 +47,16 @@ const Advisors = () => {
   }
 
 
-  // LOAD
+  // LOAD =================================
   if(isLoading) return (<Loader />)
-  // ERR
+  // ERR =================================
   if(error) {
     console.log(error)
   }
-  // DATA
+  // DATA ===============================
   return (
-    <div className="all-advisor-wrapper">
-      <div className="button-container">
+    <AllAdvisorsWrapper>
+      <CategoryButtonContainer>
         {ALL_CATEGORIES.map((btn) => (
           <FilterButton
             key={btn}
@@ -41,14 +67,14 @@ const Advisors = () => {
             handleClick={handleClick}
           />
         ))}
-        <div className="filter-category-logo">
-          <img src={`images/${category}_SM.png`} />
-        </div>
-      </div>
-      <div id="result">
+        <CategoryLogos>
+          <img style={{height: "80px"}} src={`images/${category}_SM.png`} />
+        </CategoryLogos>
+      </CategoryButtonContainer>
+      <AdvisorGrid>
         <AdvisorList advisors={advisors} category={category} />
-      </div>
-    </div>
+      </AdvisorGrid>
+    </AllAdvisorsWrapper>
   );
 };
 

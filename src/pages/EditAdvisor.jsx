@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { useMutation, useQueryClient} from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
@@ -9,6 +10,28 @@ import { useSingleAdvisorData } from "../features/advisors/useSingleAdvisor";
 import toast from "react-hot-toast";
 import { removeCompanyName } from "../utils/helpers";
 
+
+const FormWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+`;
+
+const FormSection = styled.section`
+  max-width: 685px;
+  width: 80%;
+  min-width: 300px;
+  margin:100px auto 65px auto;
+  border-radius: 10px;
+  border: 1px solid #aaaaaa9f;
+  background-color: #d3dedd4d;
+  box-shadow: 10px 5px 10px rgba(128, 128, 128, 0.173);
+  padding: 2rem 2rem 2rem 2rem;
+`;
+
+
 const EditAdvisor = () => {
   const queryClient = useQueryClient()
   const { id } = useParams();
@@ -18,7 +41,7 @@ const EditAdvisor = () => {
 
   const navigate = useNavigate();
   // Initialize useForm outside of useEffect ===============================
-  const { register, handleSubmit, reset, getValues, formState } = useForm();
+  const { register, handleSubmit, reset,  formState } = useForm();
   const {errors} = formState
   useEffect(() => {
     if (data && data.length > 0) {
@@ -91,38 +114,36 @@ const EditAdvisor = () => {
       {data.length === 0 ? (
         <Loader />
       ) : (
-        <section className="form-container">
-       <form onSubmit={handleSubmit(onSubmit, bigError)}>
-
-          <div className="edit-form-header">
-            {/* <h1>Edit {formState?.dirtyFields.name ? getValues("name") : data[0].name}</h1> */}
-            <h1>Edit Advisor </h1>
-            <img
-
-            className="advisor-img edit-form-img" 
-            src={imageSelected ? `/images/${imageSelected}` :  data[0].img} alt="Advisor Image" 
-            
+      <FormWrapper>
+        <FormSection>
+          <form onSubmit={handleSubmit(onSubmit, bigError)}>
+              <div className="edit-form-header">
+                {/* <h1>Edit {formState?.dirtyFields.name ? getValues("name") : data[0].name}</h1> */}
+                <h1>Edit Advisor </h1>
+                <img
+                className="advisor-img edit-form-img" 
+                src={imageSelected ? `/images/${imageSelected}` :  data[0].img} alt="Advisor Image" 
+                
+                />
+              </div>
+              <div className="input-container">
+                <label htmlFor="name">Name {errors?.name?.message && <span>This field is required</span>}</label>
+                <input
+                id="name"
+                className="form-input"
+                type="text"
+                name="name"
+                placeholder="Enter Full Name"
+                disabled={isEditing}
+                {...register("name",{
+                  required: "This field is required"
+              })}
             />
-          </div>
-          <div className="input-container">
-            <label htmlFor="name">Name {errors?.name?.message && <span>This field is required</span>}</label>
-            <input
-            id="name"
-            className="form-input"
-            type="text"
-            name="name"
-            placeholder="Enter Full Name"
-            disabled={isEditing}
-            {...register("name",{
-              required: "This field is required"
-          })}
-        />
             </div>
             <div className="input-container">
               <label htmlFor="name">Company {errors?.name?.message && <span>This field is required</span>}</label>
               <input
                 id="company"
-        
                 className="form-input"
                 type="text"
                 name="company"
@@ -137,7 +158,6 @@ const EditAdvisor = () => {
               <label htmlFor="name">Website {errors?.name?.message && <span>This field is required</span>}</label>
               <input 
                 id="website"
-
                 className="form-input"
                 type="text"
                 name="website"
@@ -177,30 +197,30 @@ const EditAdvisor = () => {
                 })}
                 onChange={handleImageChange}
               />
-
             </div>
             <div className="input-container">
-            <label htmlFor="legal">Legal {errors?.name?.message && <span>This field is required</span>}</label>
-            <textarea 
-                {...register("legal", {
-                  required: "This field is required"
-                })}
-                name="legal"
-                className="form-input form-input__text-area"
-                id="legal"
-                disabled={isEditing}
-              >
-                Please Enter Legal....
-            </textarea>
+              <label htmlFor="legal">Legal {errors?.name?.message && <span>This field is required</span>}</label>
+              <textarea 
+                  {...register("legal", {
+                    required: "This field is required"
+                  })}
+                  name="legal"
+                  className="form-input form-input__text-area"
+                  id="legal"
+                  disabled={isEditing}
+                >
+                  Please Enter Legal....
+              </textarea>
           </div>
-            <NavLink className="btn btn-submit" to={`/advisors/${id}`}>
-              Back
-            </NavLink>
-            <button  disabled={isEditing} className="btn btn-submit" type="submit">
-              Update
-            </button>
-          </form>
-        </section>
+          <NavLink className="btn btn-submit" to={`/advisors/${id}`}>
+            Back
+          </NavLink>
+          <button  disabled={isEditing} className="btn btn-submit" type="submit">
+            Update
+          </button>
+        </form>
+          </FormSection>
+        </FormWrapper>
       )}
     </>
   );

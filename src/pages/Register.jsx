@@ -1,10 +1,31 @@
+import styled from "styled-components";
 import {useState} from "react"
 import { useSignup } from "../features/authentication/useSignup";
 
+const FormWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+`;
+
+const FormSection = styled.section`
+  max-width: 685px;
+  width: 80%;
+  min-width: 300px;
+  margin:100px auto 65px auto;
+  border-radius: 10px;
+  border: 1px solid #aaaaaa9f;
+  background-color: #d3dedd4d;
+  box-shadow: 10px 5px 10px rgba(128, 128, 128, 0.173);
+  padding: 2rem 2rem 2rem 2rem;
+`;
+
+
+
 const Register = () => {
 
-  // const [email, setEmail] = useState("rich@email.com")
-  // const [password, setPassword] = useState("12341234")
 
   const [formInput, setFormInput] = useState({
     fullName: "",
@@ -35,8 +56,8 @@ const Register = () => {
   }
   const {fullName, email, password} = formInput
   return (
-    <div className="form-wrapper">
-      <section className="form-container form-container-register-login">
+    <FormWrapper>
+      <FormSection>
         <a href="/">
           <img
             className="nav-logo-center"
@@ -89,14 +110,14 @@ const Register = () => {
             Submit
           </button>
           <br />
-          <strong>Already a member?</strong>
+          <strong>Already have an account?</strong>
           <a className="auth-links" href="/login">
             {" "}
             Login Here
           </a>
         </form>
-      </section>
-    </div>
+      </FormSection>
+    </FormWrapper>
   );
 };
 

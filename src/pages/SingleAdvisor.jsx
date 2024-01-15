@@ -10,11 +10,13 @@ import { removeCompanyName, renderAuth } from "../utils/helpers";
 import toast from "react-hot-toast";
 
 
+
+
+
 const SingleAdvisor = () => {
   let rendered = renderAuth()
   const { id } = useParams();
   const queryClient = useQueryClient()
-  // const query = useQuery();
   const { isLoading, data, isError, error } = useSingleAdvisorData(id);
 
   const navigate = useNavigate();

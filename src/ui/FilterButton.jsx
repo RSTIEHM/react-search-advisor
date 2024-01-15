@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+/* eslint-disable react/prop-types */
+
 
 const FilterButton = ({text, selected, category, handleClick}) => {
     
