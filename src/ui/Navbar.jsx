@@ -1,14 +1,30 @@
 
 import LogoutButton from "../features/authentication/Logout";
 import {renderAuth} from "../utils/helpers"
+import styled from "styled-components";
+
 
 const Navbar = () => {
   let rendered = renderAuth()
 
+  const NavbarContainer = styled.div`
+      background-color: rgba(195, 188, 188, 0.194);
+      box-shadow: 10px 5px 10px rgba(128, 128, 128, 0.354);
+  `
+
+  const Navbar = styled.div`
+    padding: 0.5rem 3.9rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @media (max-width: 620px) {
+    flex-direction: column;
+  }
+  `
   
   return (
-    <section className="navbar-container">
-      <div className="navbar-section">
+    <NavbarContainer>
+      <Navbar>
       
         <a href="/advisors">
           {" "}
@@ -29,18 +45,20 @@ const Navbar = () => {
         </>
         ) : (
           <>
+
             <a className="btn-auth" href="/login">
               Login
             </a>
             <a className="btn-auth" href="/register">
               Register
             </a>
+            <p>Hi Chip</p>
           </>
           )}
 
         </div>
-      </div>
-    </section>
+      </Navbar>
+    </NavbarContainer>
   );
 };
 

@@ -10,7 +10,7 @@ export function useSignup() {
     onSuccess: (user) => {
       console.log(user);
       toast.success(
-        "Account has been created. Please check your email for verification"
+        "Account has been created! Close this window and check your email for verification link"
       );
       naviagate("/login", { replace: true });
     },

@@ -20,6 +20,9 @@ const FormSection = styled.section`
   background-color: #d3dedd4d;
   box-shadow: 10px 5px 10px rgba(128, 128, 128, 0.173);
   padding: 2rem 2rem 2rem 2rem;
+  @media (max-width: 575px) {
+    width: 90%;
+  }
 `;
 
 

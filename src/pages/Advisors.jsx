@@ -20,10 +20,17 @@ const CategoryButtonContainer = styled.div`
   align-items: center;
   gap: 5px;
   margin: 10px 0;
+  @media (max-width: 600px) {
+    justify-content: center;
+    margin: 0 0 10px 0;
+  }
 `;
 
 const CategoryLogos = styled.div`
   margin-left: 30px;
+  @media (max-width: 600px) {
+    display:none;
+  }
 `;
 
 const AdvisorGrid = styled.div`
